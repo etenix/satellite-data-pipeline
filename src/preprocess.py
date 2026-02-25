@@ -1,5 +1,20 @@
+import numpy as np
+
+
 def remove_noise(ds, threshold=0.01):
-    return ds.where(ds > threshold)
+    """
+    Remove low-value noise
+    """
+    ds_clean = ds.where(ds > threshold)
+
+    return ds_clean
+
 
 def normalize(ds):
-    return (ds - ds.min()) / (ds.max() - ds.min())
+    """
+    Normalize values to [0,1]
+    """
+    min_val = ds.min()
+    max_val = ds.max()
+
+    return (ds - min_val) / (max_val - min_val)
