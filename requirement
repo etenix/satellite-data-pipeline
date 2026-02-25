@@ -1,0 +1,7 @@
+xarray
+dask[complete]
+numpy
+netCDF4
+zarr
+matplotlib
+pyyaml
