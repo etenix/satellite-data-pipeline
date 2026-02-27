@@ -1,12 +1,16 @@
-# Satellite Data Processing Pipeline
+# 衛星データ処理パイプライン（Satellite Data Processing Pipeline）
 
-This project provides a scalable pipeline for processing large-scale
-satellite datasets using Xarray and Dask.
+本プロジェクトは、XarrayおよびDaskを用いて、
+大規模な衛星データを高速かつ効率的に処理するための
+スケーラブルな解析パイプラインです。
 
-## Highlights
+TB級データの分散・並列処理に対応し、
+研究用途から実務システムまで幅広く活用可能な構成となっています。
 
-- Parallel processing of TB-scale datasets
-- Lazy loading with chunk optimization
-- Distributed computation support
-- NDVI and anomaly detection workflow
-- Production-ready architecture
+## 特徴（Highlights）
+
+- TB級衛星データの並列・分散処理対応  
+- チャンク最適化による遅延ロード（Lazy Loading）設計  
+- 分散コンピューティング環境への対応  
+- NDVI計算および異常検知ワークフローの実装  
+- 実運用を想定したプロダクションレベルのアーキテクチャ  
