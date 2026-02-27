@@ -1,0 +1,61 @@
+# ============================================
+# 衛星データ処理パイプライン 設定ファイル
+# ============================================
+
+# 入力 / 出力設定
+data:
+  input_path: "data/sample.nc"       # 入力データパス
+  output_path: "output/result.nc"    # 出力データパス
+  output_format: "netcdf"            # 出力形式（netcdf / zarr）
+
+# チャンク設定（Xarray + Dask用）
+chunk:
+  time: 100          # 時間方向の分割サイズ
+  latitude: 512      # 緯度方向の分割サイズ
+  longitude: 512     # 経度方向の分割サイズ
+  band: 1            # バンド方向の分割サイズ
+
+# Dask 並列処理設定
+dask:
+  mode: "local"              # 実行モード（local / distributed）
+  n_workers: 4               # ワーカー数
+  threads_per_worker: 2      # ワーカーあたりのスレッド数
+  memory_limit: "4GB"        # メモリ制限
+
+# 前処理設定
+preprocess:
+  remove_noise: true         # ノイズ除去の有効／無効
+  noise_threshold: 0.01      # ノイズ判定閾値
+
+  normalize: true            # 正規化処理の有効／無効
+  scale_min: 0.0             # 正規化最小値
+  scale_max: 1.0             # 正規化最大値
+
+  geometric_correction: false      # 幾何補正の有効／無効
+  atmospheric_correction: false    # 大気補正の有効／無効
+
+# 解析設定
+analysis:
+
+  # NDVI 計算設定
+  ndvi:
+    enable: true             # NDVI計算の有効／無効
+    nir_band: "nir"          # 近赤外バンド名
+    red_band: "red"          # 赤色バンド名
+
+  # 異常検知設定
+  anomaly_detection:
+    enable: false            # 異常検知の有効／無効
+    method: "zscore"         # 手法（zscore / isolation_forest）
+    threshold: 3.0           # 異常判定閾値
+
+# ログ設定
+logging:
+  level: "INFO"              # ログレベル（DEBUG / INFO / WARNING / ERROR）
+  log_file: "logs/pipeline.log"   # ログ出力先
+
+# パフォーマンス設定
+performance:
+  use_lazy_evaluation: true  # 遅延評価の使用可否
+  cache_result: false        # 結果キャッシュの有効／無効
+  max_retry: 3               # 最大リトライ回数
